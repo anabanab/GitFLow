@@ -16,6 +16,8 @@ def generateRelease():
         newVersion = incrementVersion(currentVersion)
         subprocess.run(["git", "branch", f"release-{newVersion}"])
         saveNewVersionToFile(newVersion)
+        subprocess.run(["git", "add",".", f"release-{newVersion}"])
+        subprocess.run(["git", "commit", "-m", f"release-{newVersion}"])
         return newVersion
     except Exception as error:
         return f"Ett fel uppstod: {error}"
